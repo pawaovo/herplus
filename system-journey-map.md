@@ -95,6 +95,7 @@ mindmap
 
 从首次打开 APP 到进入首页的完整路径，强调“无断点”体验。
 
+```mermaid
 graph TD
     Start((用户打开APP)) --> IsNew{是否新用户?}
     
