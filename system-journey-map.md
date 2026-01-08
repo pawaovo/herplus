@@ -96,7 +96,7 @@ mindmap
 从首次打开 APP 到进入首页的完整路径，强调“无断点”体验。
 
 graph TD
-    Start((用户打开 APP)) --> IsNew{是否新用户?}
+    Start((用户打开APP)) --> IsNew{是否新用户?}
     
     %% 新用户路径
     IsNew -- Yes --> SplashA[播放真人生活流视频]
@@ -104,14 +104,15 @@ graph TD
     Login --> WizardStart[进入初始化向导]
     
     subgraph Wizard [初始化数据录入]
+        direction TB
         P1[P1: 性别确认] --> P2[P2: 追踪意愿]
         P2 --> P3[P3: 周期详情]
         P3 --> P4[P4: 身体数据]
         P4 --> P5[P5: 隐私承诺]
     end
     
-    WizardStart --> Wizard
-    P5 --> BindRing[扫描绑定指环]
+    WizardStart --> P1
+    P5 -->|点击开启旅程| BindRing[扫描绑定指环]
     BindRing -->|连接成功| Home((进入首页))
     
     %% 老用户路径
