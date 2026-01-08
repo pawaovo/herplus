@@ -97,23 +97,24 @@ mindmap
 
 ```mermaid
 graph TD
-    Start((用户打开APP)) --> IsNew{是否新用户?}
+    Start((用户打开 APP)) --> IsNew{是否新用户?}
     
+
     %% 新用户路径
     IsNew -- Yes --> SplashA[播放真人生活流视频]
     SplashA --> Login[手机号一键登录]
     Login --> WizardStart[进入初始化向导]
     
     subgraph Wizard [初始化数据录入]
-        direction TB
+        direction LR
         P1[P1: 性别确认] --> P2[P2: 追踪意愿]
         P2 --> P3[P3: 周期详情]
         P3 --> P4[P4: 身体数据]
         P4 --> P5[P5: 隐私承诺]
     end
     
-    WizardStart --> P1
-    P5 -->|点击开启旅程| BindRing[扫描绑定指环]
+    WizardStart --> Wizard
+    Wizard -->|点击开启旅程| BindRing[扫描绑定指环]
     BindRing -->|连接成功| Home((进入首页))
     
     %% 老用户路径
@@ -126,6 +127,7 @@ graph TD
 
 用户最典型的一天使用流程：看状态 -> 聊情绪 -> 捐步数。
 
+```mermaid
 sequenceDiagram
     participant User as 用户
     participant App as HerPlus APP
@@ -157,11 +159,13 @@ sequenceDiagram
     User->>App: 点击 "注入能量"
     App->>Cloud: 上传步数 & 增加公益池金额
     App-->>User: 播放粒子动画 & 更新进度条
+```
 
 ### 2.3 安全守护触发流程 (The Guardian Flow)
 
 紧急情况下的软硬结合交互逻辑。
 
+```mermaid
 stateDiagram-v2
     state "指环佩戴中" as Wearing
     state "手势识别中" as Listening
@@ -192,6 +196,7 @@ stateDiagram-v2
         失败 --> 用户点击通知: 跳转短信页
         尝试后台发短信 --> 成功: 静默完成
     }
+```
 
 
 
@@ -199,6 +204,7 @@ stateDiagram-v2
 
 为了辅助架构师进行数据库设计，梳理了核心业务实体的逻辑关系。
 
+```mermaid
 erDiagram
     User ||--|| RingDevice : binds
     User ||--|| UserProfile : has
@@ -240,3 +246,4 @@ erDiagram
         float currency_value
         string project_id
     }
+```
