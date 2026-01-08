@@ -98,14 +98,12 @@ mindmap
 graph TD
     Start((用户打开 APP)) --> IsNew{是否新用户?}
     
-
     %% 新用户路径
     IsNew -- Yes --> SplashA[播放真人生活流视频]
     SplashA --> Login[手机号一键登录]
     Login --> WizardStart[进入初始化向导]
     
     subgraph Wizard [初始化数据录入]
-        direction LR
         P1[P1: 性别确认] --> P2[P2: 追踪意愿]
         P2 --> P3[P3: 周期详情]
         P3 --> P4[P4: 身体数据]
@@ -113,7 +111,7 @@ graph TD
     end
     
     WizardStart --> Wizard
-    Wizard -->|点击开启旅程| BindRing[扫描绑定指环]
+    P5 --> BindRing[扫描绑定指环]
     BindRing -->|连接成功| Home((进入首页))
     
     %% 老用户路径
