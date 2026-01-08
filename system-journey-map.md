@@ -120,6 +120,7 @@ graph TD
     IsNew -- No --> SplashB[播放 3D Logo 动画]
     SplashB --> AutoSync[后台自动同步数据]
     AutoSync --> Home
+```
 
 ### 2.2 每日闭环体验 (The Daily Loop)
 
