@@ -1,6 +1,5 @@
 **文档文件名**: `docs/architecture.md` (Part 1/2)
 
-```markdown
 # HerPlus 技术架构文档 (Technical Architecture)
 
 | 文档属性 | 内容 |
@@ -11,7 +10,6 @@
 | **基于** | PRD v1.0, UI/UX Spec, Audit Report |
 | **作者** | Architect (Winston) |
 
----
 
 ## 1. 技术栈选型 (Tech Stack)
 
@@ -35,8 +33,6 @@
     * *规范*: 所有表名、字段名强制使用 `snake_case`。
 * **缓存/队列**: **Redis** (用于 AI 会话状态、SOS 短期令牌、限流)
 * **时序数据**: TimescaleDB (基于 PG 的插件，优化心率/体温等高频数据存储)
-
----
 
 ## 2. 系统架构图 (System Architecture)
 
@@ -93,9 +89,7 @@ graph TD
     Guardian_Svc --> SMS
     Guardian_Svc --> Map
 
-```
 
----
 
 ## 3. 数据库模型设计 (Database Schema)
 
