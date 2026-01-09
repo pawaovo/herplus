@@ -89,9 +89,6 @@ graph TD
     Guardian_Svc --> SMS
     Guardian_Svc --> Map
 
-```
-
----
 
 ## 3. 数据库模型设计 (Database Schema)
 
