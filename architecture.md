@@ -36,41 +36,38 @@
 
 ## 2. 系统架构图 (System Architecture)
 
-graph TD
+```mermaid
+flowchart TD
     %% --- Client Side ---
-    subgraph ClientBox ["HerPlus App (Flutter)"]
-        direction TB
-        UI["UI Layer (Vortex/Charts)"]
-        Logic["Business Logic (Riverpod)"]
-        LocalDB[("WatermelonDB - Offline First")]
-        BLE["BLE Manager"]
+    subgraph ClientBox [HerPlus App - Flutter]
+        UI[UI Layer - Vortex/Charts]
+        Logic[Business Logic - Riverpod]
+        LocalDB[(WatermelonDB - Offline First)]
+        BLE[BLE Manager]
     end
 
     %% --- Hardware Side ---
-    subgraph RingBox ["Smart Ring"]
-        direction TB
-        Sensor["Sensors (PPG/Temp/IMU)"]
+    subgraph RingBox [Smart Ring]
+        Sensor[Sensors - PPG/Temp/IMU]
     end
 
     %% --- Cloud Side ---
-    subgraph CloudBox ["HerPlus Backend Cloud"]
-        direction TB
-        Gateway["API Gateway / Load Balancer"]
-        Auth["Auth Service (JWT)"]
-        Core["Core API (User/Sync/Impact)"]
-        AI_Svc["AI Service (LangChain)"]
-        Guardian_Svc["Guardian Socket Server"]
+    subgraph CloudBox [HerPlus Backend Cloud]
+        Gateway[API Gateway / Load Balancer]
+        Auth[Auth Service - JWT]
+        Core[Core API - User/Sync/Impact]
+        AI_Svc[AI Service - LangChain]
+        Guardian_Svc[Guardian Socket Server]
         
-        DB[("PostgreSQL + TimescaleDB")]
-        Cache[("Redis")]
+        DB[(PostgreSQL + TimescaleDB)]
+        Cache[(Redis)]
     end
 
     %% --- External Services ---
-    subgraph ExternalBox ["Third Party Services"]
-        direction TB
-        Doubao["豆包 LLM API"]
-        SMS["SMS Provider (Twilio/Aliyun)"]
-        Map["Mapbox API"]
+    subgraph ExternalBox [Third Party Services]
+        Doubao[豆包 LLM API]
+        SMS[SMS Provider - Twilio/Aliyun]
+        Map[Mapbox API]
     end
 
     %% --- Connections ---
@@ -88,6 +85,7 @@ graph TD
     
     Guardian_Svc --> SMS
     Guardian_Svc --> Map
+```
 
 
 ## 3. 数据库模型设计 (Database Schema)
