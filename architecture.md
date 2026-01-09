@@ -40,40 +40,48 @@
 
 ## 2. 系统架构图 (System Architecture)
 
-```mermaid
 graph TD
-    subgraph Client [HerPlus App (Flutter)]
-        UI[UI Layer (Vortex/Charts)]
-        Logic[Business Logic (Riverpod)]
-        LocalDB[(WatermelonDB - Offline First)]
-        BLE[BLE Manager]
+    %% --- Client Side ---
+    subgraph ClientBox ["HerPlus App (Flutter)"]
+        direction TB
+        UI["UI Layer (Vortex/Charts)"]
+        Logic["Business Logic (Riverpod)"]
+        LocalDB[("WatermelonDB - Offline First")]
+        BLE["BLE Manager"]
     end
 
-    subgraph Hardware [Smart Ring]
-        Sensor[Sensors (PPG/Temp/IMU)]
+    %% --- Hardware Side ---
+    subgraph RingBox ["Smart Ring"]
+        direction TB
+        Sensor["Sensors (PPG/Temp/IMU)"]
     end
 
-    subgraph Cloud [HerPlus Backend Cloud]
-        Gateway[API Gateway / Load Balancer]
-        Auth[Auth Service (JWT)]
-        Core[Core API (User/Sync/Impact)]
-        AI_Svc[AI Service (LangChain)]
-        Guardian_Svc[Guardian Socket Server]
+    %% --- Cloud Side ---
+    subgraph CloudBox ["HerPlus Backend Cloud"]
+        direction TB
+        Gateway["API Gateway / Load Balancer"]
+        Auth["Auth Service (JWT)"]
+        Core["Core API (User/Sync/Impact)"]
+        AI_Svc["AI Service (LangChain)"]
+        Guardian_Svc["Guardian Socket Server"]
         
-        DB[(PostgreSQL + TimescaleDB)]
-        Cache[(Redis)]
+        DB[("PostgreSQL + TimescaleDB")]
+        Cache[("Redis")]
     end
 
-    subgraph External [Third Party Services]
-        Doubao[豆包 LLM API]
-        SMS[SMS Provider (Twilio/Aliyun)]
-        Map[Mapbox API]
+    %% --- External Services ---
+    subgraph ExternalBox ["Third Party Services"]
+        direction TB
+        Doubao["豆包 LLM API"]
+        SMS["SMS Provider (Twilio/Aliyun)"]
+        Map["Mapbox API"]
     end
 
-    %% Connections
+    %% --- Connections ---
     BLE <-->|Bluetooth 5.0| Sensor
     Logic <-->|Sync/Rest| Gateway
     Logic <-->|Socket| Guardian_Svc
+    
     Gateway --> Auth
     Gateway --> Core
     Gateway --> AI_Svc
@@ -81,6 +89,7 @@ graph TD
     Core --> DB
     AI_Svc --> Doubao
     AI_Svc --> Cache
+    
     Guardian_Svc --> SMS
     Guardian_Svc --> Map
 
@@ -270,7 +279,7 @@ CREATE TABLE research_enrollments (
           "is_onboarding_completed": false, // 审计修复: 用于前端判断跳转向导或首页
           "is_new_user": true
         }
-        ```
+```
 
 * **获取画像**
     * `GET /api/user/profile`
